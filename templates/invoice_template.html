@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Счет-фактура {{ invoice_id }}</title>
+    <style>
+        body {
+            font-family: "DejaVu Sans", Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .invoice-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .info-block {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #e8e8e8;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="invoice-title">СЧЕТ-ФАКТУРА № {{ invoice_id }}</div>
+        <div>от {{ invoice.date or invoice.invoice_date or "" }}</div>
+    </div>
+
+    <div class="info-block">
+        <p><strong>Покупатель:</strong> {{ invoice.client or invoice.customer or "" }}</p>
+        <p><strong>Сумма:</strong> {{ invoice.total or invoice.grand_total or "" }} руб.</p>
+    </div>
+
+    {% if items %}
+    <h3>Состав заказа:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Наименование</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Сумма</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.qty }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ (item.qty * item.price) | round(2) }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="total-row">
+                <td colspan="4">ИТОГО:</td>
+                <td>{{ invoice.total or invoice.grand_total or "" }} руб.</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="footer">
+        <p>Документ создан автоматически в системе генерации счетов</p>
+    </div>
+</body>
+</html>

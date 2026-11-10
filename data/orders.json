@@ -1,0 +1,45 @@
+{
+  "invoices": [
+    {
+      "invoice_id": "ORD-2026-101",
+      "invoice_date": "2026-10-15",
+      "customer": "ЗАО Компьютеры Плюс",
+      "grand_total": 32500.0,
+      "positions": [
+        {
+          "name": "Ноутбук",
+          "qty": 1,
+          "price": 25000.0
+        },
+        {
+          "name": "Мышь беспроводная",
+          "qty": 5,
+          "price": 1500.0
+        }
+      ]
+    },
+    {
+      "invoice_id": "ORD-2026-102",
+      "invoice_date": "2026-10-20",
+      "customer": "ООО СтройМатериалы",
+      "grand_total": 87650.5,
+      "positions": [
+        {
+          "name": "Цемент М500",
+          "qty": 100,
+          "price": 650.0
+        },
+        {
+          "name": "Кирпич",
+          "qty": 500,
+          "price": 45.0
+        },
+        {
+          "name": "Доставка",
+          "qty": 1,
+          "price": 5150.5
+        }
+      ]
+    }
+  ]
+}
